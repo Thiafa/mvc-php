@@ -4,24 +4,23 @@ require_once('src/conexao.php');
 
 class Model
 {
-  use $conexao;
-  public $table;
-  private $conn;
-  private $sql_query;
+  use Conexao;
 
-  public function __construct($sql, $table = null)
+  public $table;
+  public $structure;
+
+  public function __construct()
   {
-    $this->conn = $conexao;
-    $this->$table = $table;
-    $this->sql_query = $sql;
+    $this->create_table();
   }
 
   public function create_table()
   {
     try {
-      $stmt = $this->conn->prepare($this->sql_query);
+      $conn = $this->connect();
+      $stmt = $conn->prepare($this->structure);
       $stmt->execute();
-      return "Tabela criada com sucesso.";
+      return true;
     } catch (\Throwable $th) {
       return "Erro ao criar tabela: " . $th;
     }
@@ -30,15 +29,31 @@ class Model
   public function all()
   {
     try {
-      $query = "SELECT * FROM $this->table"; // Adicione um espaço após "FROM"
-      $stmt = $this->conn->prepare($query);
+      $conn = $this->connect();
+      $stmt = $conn->prepare("SELECT * FROM " . $this->table);
       $stmt->execute();
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
       return $result;
     } catch (\Throwable $th) {
-      return "Erro ao realizar consulta: " . $th->getMessage(); // Altere de $th para $th->getMessage() para obter a mensagem de erro correta
+      return "Erro ao realizar consulta: " . $th->getMessage();
+    }
+  }
+
+
+  public function find($id = null)
+  {
+    try {
+      if (is_null($id)) {
+        return false;
+      }
+      $conn = $this->connect();
+      $sql = "select * from $this->table where id = $id";
+      $stmt = $conn->prepare($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $result;
+    } catch (\Throwable $th) {
+      return "Erro ao realizar consulta: " . $th->getMessage();
     }
   }
 

@@ -1,23 +1,22 @@
 <?php
-require('src/Controllers/Controller.php');
+require('Controller.php');
 
 class UserController extends Controller
 {
   public function __construct()
   {
   }
-  public function index()
+  public static function index()
   {
-    var_dump('Chegou aqui');
-    return $this->redirect('src/Views/user.php');
+    return self::redirect('./product.php');
   }
   public function show($id)
   {
     return '';
   }
-  public function create()
+  public static function create()
   {
-    return;
+    return self::redirect('./User/create.php');
   }
   public function store($id, $data)
   {

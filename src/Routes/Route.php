@@ -1,28 +1,37 @@
 <?php
+require('./src/Controllers/UserController.php');
+
 class Route
 {
   public $page;
-  public static $controller;
+  public static $controller = [];
   public $method;
-  public $name;
   public static $routes = [];
+  public $name;
 
-  public function __construct($page, $controller)
+  public function __construct($page, $controller, $method)
   {
     $this->page = $page;
-    $this->controller = $controller;
+    self::$controller = $controller;
+    $this->method = $method;
   }
 
-  static public function get()
+  static public function get($url, $controller)
   {
-    if (self::$controller[0]) {
-      return new static(new self::$controller[0], 'GET');
-    } else {
-      echo "Controlador não encontrado.";
+    if (is_array($controller)) {
+      $controllerInstance = new $controller[0]();
+      return new static($url, [$controllerInstance, $controller[1]], 'GET');
     }
+    return new static($url, $controller, 'GET');
   }
+
+
   static public function post($url, $controller)
   {
+    if (is_array($controller)) {
+      $controllerInstance = new $controller[0]();
+      return new static($url, [$controllerInstance, $controller[1]], 'POST');
+    }
     return new static($url, $controller, 'POST');
   }
 
@@ -30,25 +39,12 @@ class Route
   {
     $this->name = $value;
     self::$routes[$value] = $this->page;
-    echo "<pre>";
-    var_dump($this);
-    echo "</pre>";
     return $this;
   }
 
   public static function route($name)
   {
 
-    if (isset(self::$routes[$name])) {
-      return self::$routes[$name] . ".php";
-    } else {
-      return '/';
-    }
+    return isset(self::$routes[$name]) ? self::$routes[$name] . ".php" : 'index.php';
   }
-
-  public static function asd()
-  {
-    // var_dump(self::$routes);x'
-    return self::$routes;
-  }
-};
+}

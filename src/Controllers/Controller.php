@@ -6,7 +6,7 @@ class Controller
   {
   }
 
-  public function redirect($url, $data = null)
+  public static function redirect($url, $data = null)
   {
   }
 }

@@ -7,5 +7,5 @@
 
 $router->define([
   '' => 'src/controllers/index.php',
-  'user' => 'controllers/user.php',
+  'user' => 'src/controllers/user.php',
 ]);

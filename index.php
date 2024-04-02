@@ -1,11 +1,9 @@
-<?php include_once("base.php") ?>
+<?php
 
-<a href="<?php Route::route('user.index') ?>">Users</a>
-</br>
-<a href="<?= Route::route('user.create') ?>">Criar</a>
+$database = require 'core/bootstrap.php';
 
-<!-- <form action="<= Route::route('user.index') ?>" method="POST"> -->
-<!-- <label for="nome">Nome</label>
-<input type="text" id="nome" name="nome">
-<input type="submit" value="Entrar">
-</form> -->
+$router = new Router;
+
+require 'src/Routes/routes.php';
+
+$router()->direct();

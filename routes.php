@@ -1,11 +1,8 @@
 <?php
 
-// $router->define([
-//   '' => 'src/Controllers/index.php',
-//   'user' => 'src/Controllers/user.php',
-// ]);
-
 $router->define([
   '' => 'src/controllers/index.php',
-  'user' => 'src/controllers/user.php',
+  'cadastros' => 'src/controllers/cadastro.php',
+  'cadastros/visualizar' => 'src/controllers/cadastro.php',
+  'cadastros/excluir' => 'src/controllers/cadastro.php',
 ]);

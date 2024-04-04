@@ -1,7 +1,7 @@
 <?php include('src/Views/partials/head.php'); ?>
 <div class="my-4">
   <h1 class="text-center">Cadastro</h1>
-  <?php if (isset($cadastro)) { ?>
+  <?php if (isset($cadastros)) { ?>
     <table class="table-info m-auto">
       <thead>
         <tr>
@@ -23,7 +23,6 @@
             </td>
           </tr>
         <?php } ?>
-
       </tbody>
     </table>
   <?php } else { ?>

@@ -17,9 +17,7 @@
         <td> <?= $cadastro->email ?></td>
         <td>
         <td>
-          <form action="src/controllers/cadastro.php" method="delete">
-            Excluir
-          </form>
+          <a href="/cadastros/excluir?id=<?= $cadastro->id ?>">Excluir</a>
         </td>
         </form>
         </td>

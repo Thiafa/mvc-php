@@ -1,4 +1,4 @@
-<?php require('src/Views/partials/head.php'); ?>
+<?php include('src/Views/partials/head.php'); ?>
 <div class="my-4">
   <h1 class="text-center">Cadastro</h1>
   <table class="table-info m-auto">
@@ -27,4 +27,4 @@
     </tbody>
   </table>
 </div>
-<?php require('src/Views/partials/footer.php'); ?>
+<?php include('src/Views/partials/footer.php'); ?>

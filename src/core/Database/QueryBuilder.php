@@ -23,8 +23,8 @@ class QueryBuider
   }
   public function delete($table, $id)
   {
-    $statement = $this->pdo->prepare("delete * from {$table} where id = $id");
-    $statement->execute();
+    $statement = $this->pdo->prepare("DELETE FROM {$table} WHERE id = ?");
+    $statement->execute([$id]);
     return "Dado excluído com sucesso.";
   }
 }
